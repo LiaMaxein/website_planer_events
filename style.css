@@ -1,0 +1,141 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f7f6;
+    color: #333;
+    line-height: 1.6;
+}
+
+header {
+    background-color: #5cb85c; /* Ein frisches Grün */
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+h1, h2 {
+    color: #4CAF50; /* Ein etwas dunkleres Grün für Überschriften */
+}
+
+main {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 20px auto;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+}
+
+#vorschlaege, #bucketlist {
+    margin-bottom: 40px;
+}
+
+#event-filter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #e8f5e9; /* Sehr helles Grün */
+    border-radius: 5px;
+}
+
+#event-filter label {
+    font-weight: bold;
+}
+
+#event-filter select, #event-filter input[type="text"], #event-filter button {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+#event-filter button {
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#event-filter button:hover {
+    background-color: #45a049;
+}
+
+#event-cards-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.event-card {
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: transform 0.2s ease;
+}
+
+.event-card:hover {
+    transform: translateY(-5px);
+}
+
+.event-card h3 {
+    margin-top: 0;
+    color: #333;
+}
+
+.event-card p {
+    margin: 5px 0;
+    font-size: 0.95rem;
+}
+
+.event-card .response-options {
+    margin-top: 15px;
+    padding-top: 10px;
+    border-top: 1px dashed #eee;
+}
+
+.event-card .response-options label {
+    margin-right: 15px;
+    font-size: 0.9rem;
+}
+
+.event-card .response-options input[type="radio"] {
+    margin-right: 5px;
+}
+
+.event-card .event-link {
+    display: inline-block;
+    margin-top: 10px;
+    color: #007bff;
+    text-decoration: none;
+}
+
+.event-card .event-link:hover {
+    text-decoration: underline;
+}
+
+#bucketlist-items {
+    list-style: none;
+    padding: 0;
+}
+
+#bucketlist-items li {
+    background-color: #e0f7fa; /* Helles Blaugrün */
+    margin-bottom: 10px;
+    padding: 10px 15px;
+    border-radius: 5px;
+    border-left: 5px solid #00bcd4;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
+    background-color: #333;
+    color: white;
+}

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unsere gemeinsamen Unternehmungen</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+    <header>
+        <h1>Unsere gemeinsamen Unternehmungen</h1>
+        <p>"Wie viele Sommer haben wir noch? Man weiß es nicht."</p>
+    </header>
+
+    <main>
+        <section id="vorschlaege">
+            <h2>Vorschläge für Unternehmungen</h2>
+            <div id="event-filter">
+                <label for="filter-month">Monat filtern:</label>
+                <select id="filter-month">
+                    <option value="">Alle</option>
+                    <option value="07">Juli</option>
+                    <option value="08">August</option>
+                    <option value="09">September</option>
+                    </select>
+                <label for="sort-cost">Sortieren nach Kosten:</label>
+                <select id="sort-cost">
+                    <option value="">Standard</option>
+                    <option value="asc">Aufsteigend</option>
+                    <option value="desc">Absteigend</option>
+                </select>
+                <label for="filter-location">Ort filtern:</label>
+                <input type="text" id="filter-location" placeholder="Ort eingeben...">
+                <button id="apply-filters">Filter anwenden</button>
+            </div>
+            <div id="event-cards-container">
+                </div>
+        </section>
+
+        <section id="bucketlist">
+            <h2>Ausflugsideen & Bucket List</h2>
+            <ul id="bucketlist-items">
+                </ul>
+            <h3>Aktivitäten in Graz</h3>
+            <ul>
+                <li>Battlekart Graz</li>
+                </ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Unsere Unternehmungen</p>
+    </footer>
+
+
+    
+    <script src="script.js"></script>
+</body>
+</html>
