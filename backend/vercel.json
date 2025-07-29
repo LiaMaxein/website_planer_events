@@ -1,17 +1,17 @@
 {
   "functions": {
-    "src/api/server.ts": {
+    "api/server.ts": {
       "runtime": "node@22.15.1"
     }
   },
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "/src/api/server.ts"
+      "dest": "/api/server.ts"
     },
     {
       "src": "/(.*)",
-      "dest": "/src/api/server.ts"
+      "dest": "/api/server.ts"
     }
   ]
 }
