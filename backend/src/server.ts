@@ -1,31 +1,58 @@
-// src/server.ts
+// backend/src/server.ts
 import express from 'express';
+import cors from 'cors';
 import dotenv from 'dotenv';
-import { createClient } from '@supabase/supabase-js';
-import cors from 'cors'; // Importiere cors
+import { createClient, PostgrestResponse } from '@supabase/supabase-js'; // Importiere PostgrestResponse
 
 dotenv.config(); // Lädt die Umgebungsvariablen aus .env
 
 const app = express();
 const port = process.env.PORT || 3000;
 
-// Konfiguriere CORS, um Anfragen von deinem Frontend zu erlauben
-// ERSETZE 'http://localhost:5500' mit der tatsächlichen URL deines Frontends,
-// wenn du es deployt hast (z.B. deine GitHub Pages URL).
-const corsOptions = {
-  origin: 'http://localhost:5500', // Oder die URL, von der dein Frontend geladen wird (z.B. Live Server in VS Code)
-  optionsSuccessStatus: 200 // Some legacy browsers (IE11, various SmartTVs) choke on 204
-};
-app.use(cors(corsOptions));
 app.use(express.json()); // Ermöglicht das Parsen von JSON im Request Body
 
 // Supabase-Client für das Backend initialisieren
-// Hier verwenden wir den service_role Key, da er alle RLS umgeht
-// und nur vom Backend aus aufgerufen wird.
 const supabaseUrl = process.env.SUPABASE_URL as string;
 const supabaseServiceKey = process.env.SUPABASE_SERVICE_KEY as string;
 
 const supabase = createClient(supabaseUrl, supabaseServiceKey);
+
+// CORS Optionen - DIESER BLOCK IST ENTSCHEIDEND
+const allowedOrigins = [
+  // HINWEIS: Ersetze 'https://DEIN-GITHUB-USERNAME.github.io/WEBSITE_PLANER_EVENTS'
+  // durch die tatsächliche URL deines Frontends auf GitHub Pages,
+  // sobald du deployst!
+  'https://DEIN-GITHUB-USERNAME.github.io/WEBSITE_PLANER_EVENTS',
+
+  // Dies ist die Vercel-URL deines Backends, wie sie im Vercel Dashboard steht.
+  // Füge diese URL hier ein, sobald du dein Backend erfolgreich auf Vercel deployt hast
+  // und sie zum ersten Mal verwendest.
+  // Beispiel: 'https://website-planer-events-xxxxxx.vercel.app',
+  'https://website-planer-events-hlsqwd6pk-lia-maxeins-projects.vercel.app', // Deine Vercel Domain
+
+  // --- LOKALE ENTWICKLUNGS-URLs ---
+  'http://localhost:3000',    // Für direkte Backend-Tests oder wenn Frontend vom selben localhost kommt
+  'http://127.0.0.1:3000',    // das ust die Cors Richtilinie die läuft
+  'http://localhost:5500',    // Häufiger Port für VS Code Live Server
+  'http://127.0.0.1:5500',    // Alternative für VS Code Live Server
+  'http://localhost:8080',    // Andere gängige lokale Server
+  'http://127.0.0.1:8080'     // Alternative für andere lokale Entwicklungsserver
+];
+
+const corsOptions = {
+  // Explizite Typisierung für origin und callback hinzufügen
+  origin: function (origin: string | undefined, callback: (err: Error | null, allow?: boolean) => void) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      console.error('CORS blocked origin:', origin);
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  optionsSuccessStatus: 200
+};
+
+app.use(cors(corsOptions));
 
 // --- API-Endpunkte für Events ---
 app.get('/api/events', async (req, res) => {
@@ -56,8 +83,7 @@ app.get('/api/bucketlist', async (req, res) => {
   res.json(data);
 });
 
-// --- Beispiel-Endpunkt zum Aktualisieren der Bucketlist (für den Checkbox-Status) ---
-// Für eine produktive App würdest du hier natürlich mehr Validierung und ggf. Authentifizierung benötigen.
+// --- Endpunkt zum Aktualisieren der Bucketlist (für den Checkbox-Status) ---
 app.put('/api/bucketlist/:id', async (req, res) => {
   const { id } = req.params;
   const { abgehakt } = req.body;
@@ -67,16 +93,24 @@ app.put('/api/bucketlist/:id', async (req, res) => {
   }
 
   console.log(`Updating bucketlist item ${id} to abgehakt: ${abgehakt}`);
-  const { data, error } = await supabase
+  // Beim Update gibt Supabase ein PostgrestResponse-Objekt zurück,
+  // dessen 'data'-Eigenschaft ein Array von den aktualisierten Datensätzen oder null sein kann.
+  const { data, error }: PostgrestResponse<any> = await supabase
     .from('bucketlist_items')
     .update({ abgehakt: abgehakt })
-    .eq('id', id);
+    .eq('id', id)
+    .select(); // Füge .select() hinzu, um die aktualisierten Daten zurückzubekommen
 
   if (error) {
     console.error('Error updating bucketlist item:', error);
     return res.status(500).json({ error: error.message });
   }
-  res.json(data);
+
+  // Überprüfe, ob Daten vorhanden sind und das Array nicht leer ist
+  if (!data || data.length === 0) {
+    return res.status(404).json({ error: 'Bucketlist item not found or no change occurred.' });
+  }
+  res.json(data[0]); // Sende das erste aktualisierte Objekt zurück
 });
 
 
