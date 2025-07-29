@@ -1,0 +1,18 @@
+
+{
+  "functions": {
+    "src/server.ts": {
+      "runtime": "node tolerant"
+    }
+  },
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/src/server.ts"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/src/server.ts"
+    }
+  ]
+}
