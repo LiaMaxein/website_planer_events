@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "target": "es2020",         /* JavaScript-Zielversion */
+    "module": "commonjs",       /* Modulsystem für Node.js */
+    "outDir": "./dist",         /* Ausgabeverzeichnis für kompilierte JS-Dateien */
+    "rootDir": "./src",         /* Quellverzeichnis für TS-Dateien */
+    "strict": true,             /* Alle strengen Typprüfungsoptionen aktivieren */
+    "esModuleInterop": true,    /* Interoperabilität mit CommonJS-Modulen */
+    "skipLibCheck": true,       /* Typ-Überprüfung von Bibliotheks-Definitionsdateien überspringen */
+    "forceConsistentCasingInFileNames": true /* Dateinamen-Groß-/Kleinschreibung erzwingen */
+  }
+}

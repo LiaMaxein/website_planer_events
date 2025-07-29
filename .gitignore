@@ -1,0 +1,11 @@
+# Ignoriere Node.js Module und Build-Outputs für das Backend
+/backend/node_modules/
+/backend/dist/
+/backend/.env
+/backend/npm-debug.log*
+/backend/yarn-debug.log*
+/backend/yarn-error.log*
+
+# Allgemeine Ignorierungen für das gesamte Projekt
+.DS_Store # macOS spezifische Dateien
+*.log
