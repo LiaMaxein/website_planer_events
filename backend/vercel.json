@@ -2,7 +2,7 @@
 {
   "functions": {
     "src/server.ts": {
-      "runtime": "node tolerant"
+      "runtime": "node@20.x"
     }
   },
   "routes": [
