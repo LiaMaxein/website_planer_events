@@ -1,17 +1,15 @@
 {
-  "functions": {
-    "api/server.ts": {
-      "runtime": "node@22"
+  "version": 2,
+  "builds": [
+    {
+      "src": "dist/server.js",
+      "use": "@vercel/node"
     }
-  },
+  ],
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "/api/server.ts"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/api/server.ts"
+      "dest": "/dist/server.js"
     }
   ]
 }
