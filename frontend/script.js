@@ -2,7 +2,8 @@
 // Wenn dein Frontend und Backend auf demselben Server laufen, kannst du relative Pfade verwenden.
 // Für lokale Entwicklung ist 'http://localhost:3000' (oder den Port, den du im Backend festgelegt hast) korrekt.
 // Beim Deployment musst du dies auf die URL deines deployten Backends ändern!
-const BACKEND_BASE_URL = 'http://localhost:3000';
+// const BACKEND_BASE_URL = 'http://localhost:3000';
+const BACKEND_BASE_URL = 'https://website-planer-events.vercel.app';
 
 const eventCardsContainer = document.getElementById('event-cards-container');
 const bucketlistItemsList = document.getElementById('bucketlist-items');
