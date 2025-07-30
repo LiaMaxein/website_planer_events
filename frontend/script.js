@@ -71,6 +71,7 @@ function renderEvents(eventsToRender) {
             ${event.link ? `<p><a href="${event.link}" target="_blank" class="event-link">Weitere Infos</a></p>` : ''}
             <p><strong>Ort:</strong> ${event.ort}</p>
             ${event.zusatzinfo ? `<p><strong>Zusatzinfo:</strong> ${event.zusatzinfo}</p>` : ''}
+            ${event.tags && event.tags.length ? `<p><strong>Tags:</strong> ${event.tags.map(tag => '#' + tag).join(' ')}</p>` : ''}
 
             <div class="response-options">
                 <p>Dein Interesse:</p>
@@ -109,6 +110,10 @@ function renderBucketlistItems(items) {
         listItem.innerHTML = `
             <input type="checkbox" id="bucket-${item.id}" ${item.abgehakt ? 'checked' : ''}>
             <label for="bucket-${item.id}">${item.name}</label>
+            ${item.adresse ? `<div><strong>Adresse:</strong> ${item.adresse}</div>` : ''}
+            ${item.website ? `<div><a href="${item.website}" target="_blank">Website</a></div>` : ''}
+            ${item.tags && item.tags.length ? `<div><strong>Tags:</strong> ${item.tags.map(tag => '#' + tag).join(' ')}</div>` : ''}
+            ${item.zusatzinfo ? `<div><strong>Zusatzinfo:</strong> ${item.zusatzinfo}</div>` : ''}
         `;
         bucketlistItemsList.appendChild(listItem);
 

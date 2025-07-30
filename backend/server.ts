@@ -66,9 +66,13 @@ app.get('/api/test', (req, res) => {
 // --- API-Endpunkte für Events ---
 app.get('/api/events', async (req, res) => {
   console.log('Fetching events...');
+  const today = new Date();
+  today.setHours(0, 0, 0, 0); // Setzt die Uhrzeit auf Mitternacht
+
   const { data, error } = await supabase
     .from('events')
     .select('*')
+    .gte('datum', today.toISOString().split('T')[0]) // Nur Events ab heute
     .order('datum', { ascending: true });
 
   if (error) {
