@@ -63,6 +63,10 @@ app.get('/api/test', (req, res) => {
   res.json({ message: 'CORS test successful', origin: req.headers.origin });
 });
 
+app.get('/', (req, res) => {
+  res.send('Hello World');
+});
+
 // --- API-Endpunkte für Events ---
 app.get('/api/events', async (req, res) => {
   console.log('Fetching events...');
