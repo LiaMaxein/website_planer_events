@@ -21,7 +21,7 @@ const allowedOrigins = [
     // HINWEIS: Ersetze 'https://DEIN-GITHUB-USERNAME.github.io/WEBSITE_PLANER_EVENTS'
     // durch die tatsächliche URL deines Frontends auf GitHub Pages,
     // sobald du deployst!
-    'https://liamaxein.github.io/website_planer_events/',
+    'https://liamaxein.github.io/',
     // Dies ist die Vercel-URL deines Backends, wie sie im Vercel Dashboard steht.
     // Füge diese URL hier ein, sobald du dein Backend erfolgreich auf Vercel deployt hast
     // und sie zum ersten Mal verwendest.
