@@ -8,4 +8,4 @@
 
 # Allgemeine Ignorierungen für das gesamte Projekt
 .DS_Store # macOS spezifische Dateien
-*.log
+*.log.DS_Store
