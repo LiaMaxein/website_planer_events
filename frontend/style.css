@@ -1,141 +1,353 @@
+/* Allgemeine Farben als CSS-Variablen */
+:root {
+  --primary-color: #3498db;      /* Lebendiges Blau */
+  --secondary-color: #2c3e50;    /* Dunkles Grau/Blau für Header, Footer, Navigation */
+  --background-light: #ecf0f1;   /* Sehr helles, fast weißes Grau für den allgemeinen Hintergrund */
+  --text-dark: #34495e;          /* Dunkleres Grau für Haupttext */
+  --card-bg: #ffffff;            /* Reinweiß für Karten und Boxen */
+  --border-color: #dde1e6;       /* Helle Rahmen */
+  --shadow-color: rgba(0, 0, 0, 0.1); /* Leichter Schatten */
+  --accent-color: #e74c3c;       /* Ein leuchtendes Rot als Akzent für z.B. Hover-Effekte oder wichtige Elemente */
+}
+
 body {
-    font-family: 'Arial', sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f7f6;
-    color: #333;
-    line-height: 1.6;
+  font-family: 'Open Sans', sans-serif; /* Allgemeine Schriftart, importiert in index.html */
+  background-color: var(--background-light);
+  color: var(--text-dark);
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+  display: flex; /* Für Flexbox-Layout der Seite */
+  flex-direction: column;
+  min-height: 100vh; /* Mindesthöhe des Viewports, damit der Footer unten bleibt */
 }
 
 header {
-    background-color: #5cb85c; /* Ein frisches Grün */
-    color: white;
-    padding: 20px 0;
-    text-align: center;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  background-color: var(--secondary-color); /* Dunkle Kopfzeile */
+  color: white;
+  padding: 20px 0;
+  text-align: center;
+  box-shadow: 0 4px 12px var(--shadow-color); /* Prononcierter Schatten */
 }
 
-h1, h2 {
-    color: #4CAF50; /* Ein etwas dunkleres Grün für Überschriften */
+h1 {
+  font-family: 'Roboto', sans-serif; /* Überschrift-Schriftart, importiert in index.html */
+  color: white; /* Wie gewünscht */
+  margin-bottom: 0; /* Entfernt unteren Margin für Header-H1 */
+}
+
+nav {
+  background-color: var(--secondary-color); /* Navigation in gleicher Farbe wie Header */
+  padding: 10px 0;
+  text-align: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.1); /* Dezente Trennlinie */
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  gap: 30px; /* Mehr Abstand zwischen Nav-Links */
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: 600; /* Etwas dicker */
+  padding: 8px 15px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+nav a:hover {
+  background-color: var(--primary-color); /* Hover-Effekt mit Primärfarbe */
+  transform: translateY(-2px); /* Leichter Hoch-Effekt */
 }
 
 main {
-    padding: 20px;
-    max-width: 1200px;
-    margin: 20px auto;
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+  flex-grow: 1; /* Nimmt verfügbaren Platz ein */
+  padding: 30px 20px;
+  max-width: 1000px; /* Etwas schmaler für Fokus */
+  margin: 20px auto;
 }
 
-#vorschlaege, #bucketlist {
-    margin-bottom: 40px;
+section {
+  background-color: var(--card-bg);
+  border-radius: 12px; /* Rundere Ecken */
+  padding: 35px;
+  margin-bottom: 25px;
+  box-shadow: 0 10px 25px var(--shadow-color); /* Stärkerer Schatten für Abschnitte */
+  overflow: hidden; /* Für saubere Ränder bei Inhalten */
 }
 
+h2 {
+  font-family: 'Roboto', sans-serif;
+  color: var(--primary-color); /* Überschriften in Primärfarbe */
+  margin-top: 0;
+  border-bottom: 2px solid var(--primary-color); /* Linie unter H2 */
+  padding-bottom: 10px;
+  margin-bottom: 25px;
+}
+
+/* Event-Filter */
 #event-filter {
     display: flex;
     flex-wrap: wrap;
     gap: 15px;
     margin-bottom: 20px;
-    padding: 15px;
-    background-color: #e8f5e9; /* Sehr helles Grün */
-    border-radius: 5px;
+    padding: 20px; /* Etwas mehr Padding */
+    background-color: var(--background-light); /* Helle Hintergrundfarbe */
+    border-radius: 8px; /* Anpassung an neue Rundungen */
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.05); /* Dezenter innerer Schatten */
+    border: 1px solid var(--border-color); /* Dezenter Rand */
 }
 
 #event-filter label {
-    font-weight: bold;
+    font-weight: 600; /* Etwas fetter */
+    color: var(--text-dark);
 }
 
-#event-filter select, #event-filter input[type="text"], #event-filter button {
-    padding: 8px 12px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+#event-filter select, #event-filter input[type="text"] {
+    padding: 10px 15px; /* Mehr Padding */
+    border: 1px solid var(--border-color);
+    border-radius: 6px; /* Rundere Ecken */
     font-size: 1rem;
+    color: var(--text-dark);
+    background-color: var(--card-bg);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+#event-filter select:focus, #event-filter input[type="text"]:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2); /* Blauer Fokus-Schatten */
+    outline: none;
 }
 
 #event-filter button {
-    background-color: #4CAF50;
+    background-color: var(--primary-color);
     color: white;
+    padding: 10px 20px; /* Mehr Padding */
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    font-weight: 700; /* Fetterer Text */
 }
 
 #event-filter button:hover {
-    background-color: #45a049;
+    background-color: #2980b9; /* Etwas dunkleres Blau beim Hover */
+    transform: translateY(-1px); /* Leichter Hoch-Effekt */
 }
 
+/* Event- und Bucketlist-Karten */
 #event-cards-container {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 20px;
+    gap: 25px; /* Etwas mehr Abstand */
 }
 
-.event-card {
-    background-color: #ffffff;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 20px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    transition: transform 0.2s ease;
+.event-card, .bucketlist-item { /* Kombiniert, um ähnlichen Stil zu haben */
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 15px; /* Kann für .bucketlist-item relevant sein, wenn es einzeln steht */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); /* Dezenterer Schatten */
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 }
 
-.event-card:hover {
-    transform: translateY(-5px);
+.event-card:hover, .bucketlist-item:hover {
+  transform: translateY(-5px); /* Leichter Schwebeeffekt */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Stärkerer Schatten beim Hover */
 }
 
-.event-card h3 {
-    margin-top: 0;
-    color: #333;
+.event-card h3, .bucketlist-item h3 {
+  color: var(--secondary-color); /* Namen der Events/Items */
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 1.4em;
 }
 
-.event-card p {
-    margin: 5px 0;
-    font-size: 0.95rem;
+.event-card p, .bucketlist-item p {
+  margin: 8px 0;
+  font-size: 0.9em; /* Etwas kleiner für Details */
+  color: var(--text-dark);
 }
 
+.event-card strong, .bucketlist-item strong {
+  color: var(--primary-color); /* Hervorhebung der Labels */
+}
+
+/* Spezifische Elemente in Event-Karten */
 .event-card .response-options {
     margin-top: 15px;
     padding-top: 10px;
-    border-top: 1px dashed #eee;
+    border-top: 1px dashed var(--border-color); /* Angepasste Farbe */
 }
 
 .event-card .response-options label {
     margin-right: 15px;
     font-size: 0.9rem;
+    color: var(--text-dark);
 }
 
 .event-card .response-options input[type="radio"] {
     margin-right: 5px;
+    accent-color: var(--primary-color); /* Farbe der Radio-Buttons */
 }
 
 .event-card .event-link {
     display: inline-block;
     margin-top: 10px;
-    color: #007bff;
+    color: var(--primary-color); /* Angepasste Linkfarbe */
     text-decoration: none;
 }
 
 .event-card .event-link:hover {
     text-decoration: underline;
+    color: var(--accent-color); /* Akzentfarbe beim Hover */
 }
 
+/* Bucketlist spezifische Anpassungen */
 #bucketlist-items {
     list-style: none;
     padding: 0;
+    display: grid; /* Auch hier Grid-Layout für Flexibilität */
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
 }
 
-#bucketlist-items li {
-    background-color: #e0f7fa; /* Helles Blaugrün */
-    margin-bottom: 10px;
-    padding: 10px 15px;
-    border-radius: 5px;
-    border-left: 5px solid #00bcd4;
+#bucketlist-items li { /* Alte Regel wird ersetzt durch .bucketlist-item */
+    /* Diese Regel wird durch .bucketlist-item überschrieben. Hier nur falls spezifische Listen-Styles notwendig sind */
 }
+
+.bucketlist-item { /* Definiert im kombinierten .event-card, .bucketlist-item oben */
+    background-color: var(--card-bg);
+    margin-bottom: 0; /* Kein zusätzlicher Margin, da Grid Gap dies regelt */
+    border-left: 5px solid var(--primary-color); /* Linker Rand in Primärfarbe */
+    display: flex; /* Für Checkbox-Anordnung */
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+/* Checkbox-Stil anpassen */
+.bucketlist-item input[type="checkbox"] {
+  accent-color: var(--primary-color); /* Farbe der Checkbox */
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+/* Link-Stile (allgemein) */
+a {
+  color: var(--primary-color);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--accent-color); /* Akzentfarbe beim Hover */
+  text-decoration: underline;
+}
+
+/* Tags/Kategorien */
+.tags {
+  margin-top: 15px;
+  display: flex; /* Tags nebeneinander */
+  flex-wrap: wrap; /* Umbruch bei Platzmangel */
+  gap: 8px; /* Abstand zwischen Tags */
+}
+.tags span {
+  display: inline-block;
+  background-color: var(--primary-color); /* Tags in Primärfarbe */
+  color: white;
+  padding: 6px 12px;
+  border-radius: 20px; /* Pillen-Form */
+  font-size: 0.8em;
+  font-weight: 600;
+  opacity: 0.9;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.2s ease;
+}
+/* Spezifische Tag-Farben (Beispiele) */
+.tags span.tag-Regentage {
+    background-color: #95a5a6; /* Grauer für Regentage */
+}
+.tags span.tag-Wien {
+    background-color: #c0392b; /* Rot für Wien */
+}
+.tags span.tag-Berlin {
+    background-color: #f1c40f; /* Gelb für Berlin */
+    color: var(--text-dark); /* Dunklerer Text auf Gelb */
+}
+.tags span.tag-Sommer {
+    background-color: #f39c12; /* Orange für Sommer */
+}
+.tags span.tag-Winter {
+    background-color: #2980b9; /* Dunkelblau für Winter */
+}
+.tags span.tag-Italien {
+    background-color: #27ae60; /* Grün für Italien */
+}
+.tags span.tag-Urlaub {
+    background-color: #8e44ad; /* Lila für Urlaub */
+}
+.tags span.tag-Unterkunft {
+    background-color: #d35400; /* Orange-Braun für Unterkunft */
+}
+.tags span.tag-LiasHeimat {
+    background-color: #7f8c8d; /* Grauer für Heimat */
+}
+.tags span.tag-Köln {
+    background-color: #1abc9c; /* Türkis für Köln */
+}
+.tags span.tag-Silvester {
+    background-color: #34495e; /* Dunkles Grau für Silvester */
+}
+.tags span.tag-Graz {
+    background-color: #c0392b; /* Rot für Graz */
+}
+.tags span.tag-BBQ {
+    background-color: #e67e22; /* Dunkelorange für BBQ */
+}
+/* Füge weitere spezifische Tag-Farben hinzu, falls gewünscht, indem du .tag-TAGNAME erstellst */
+
 
 footer {
-    text-align: center;
-    padding: 20px;
-    margin-top: 40px;
-    background-color: #333;
-    color: white;
+  background-color: var(--secondary-color);
+  color: white;
+  text-align: center;
+  padding: 20px 0;
+  margin-top: 30px;
+  box-shadow: 0 -4px 12px var(--shadow-color);
+}
+
+
+/* Responsivität */
+@media (max-width: 768px) {
+  nav ul {
+    flex-direction: column;
+    gap: 10px;
+  }
+  main {
+    padding: 20px 10px;
+    margin: 10px auto;
+  }
+  section {
+    padding: 25px;
+  }
+  #event-cards-container, #bucketlist-items {
+      grid-template-columns: 1fr; /* Eine Spalte auf kleinen Bildschirmen */
+  }
 }
