@@ -19,16 +19,12 @@ const supabase = createClient(supabaseUrl, supabaseServiceKey);
 
 // CORS Optionen - DIESER BLOCK IST ENTSCHEIDEND
 const allowedOrigins = [
-  // HINWEIS: Ersetze 'https://DEIN-GITHUB-USERNAME.github.io/WEBSITE_PLANER_EVENTS'
-  // durch die tatsächliche URL deines Frontends auf GitHub Pages,
-  // sobald du deployst!
-  'https://liamaxein.github.io/WEBSITE_PLANER_EVENTS',
+  // GitHub Pages URL (ohne Repository-Name)
+  'https://liamaxein.github.io',
 
-  // Dies ist die Vercel-URL deines Backends, wie sie im Vercel Dashboard steht.
-  // Füge diese URL hier ein, sobald du dein Backend erfolgreich auf Vercel deployt hast
-  // und sie zum ersten Mal verwendest.
-  // Beispiel: 'https://website-planer-events-xxxxxx.vercel.app',
-  'https://website-planer-events-hlsqwd6pk-lia-maxeins-projects.vercel.app', // Deine Vercel Domain
+  // Vercel Backend URL
+  'https://website-planer-events.vercel.app',
+  'https://website-planer-events-hlsqwd6pk-lia-maxeins-projects.vercel.app',
 
   // --- LOKALE ENTWICKLUNGS-URLs ---
   'http://localhost:3000',    // Für direkte Backend-Tests oder wenn Frontend vom selben localhost kommt
@@ -42,17 +38,30 @@ const allowedOrigins = [
 const corsOptions = {
   // Explizite Typisierung für origin und callback hinzufügen
   origin: function (origin: string | undefined, callback: (err: Error | null, allow?: boolean) => void) {
+    console.log('CORS check for origin:', origin);
+    console.log('Allowed origins:', allowedOrigins);
+    
     if (!origin || allowedOrigins.includes(origin)) {
+      console.log('CORS allowed for origin:', origin);
       callback(null, true);
     } else {
       console.error('CORS blocked origin:', origin);
       callback(new Error('Not allowed by CORS'));
     }
   },
-  optionsSuccessStatus: 200
+  optionsSuccessStatus: 200,
+  credentials: true
 };
 
 app.use(cors(corsOptions));
+
+// Test endpoint for CORS debugging
+app.get('/api/test', (req, res) => {
+  console.log('Test endpoint hit');
+  console.log('Origin:', req.headers.origin);
+  console.log('Method:', req.method);
+  res.json({ message: 'CORS test successful', origin: req.headers.origin });
+});
 
 // --- API-Endpunkte für Events ---
 app.get('/api/events', async (req, res) => {
@@ -114,4 +123,8 @@ app.put('/api/bucketlist/:id', async (req, res) => {
 });
 
 
-export default app;
+// Starte den Server
+app.listen(port, () => {
+  console.log(`Backend läuft auf http://localhost:${port}`);
+  console.log(`Frontend muss Anfragen an http://localhost:${port} senden.`);
+});
