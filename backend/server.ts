@@ -128,3 +128,5 @@ app.listen(port, () => {
   console.log(`Backend läuft auf http://localhost:${port}`);
   console.log(`Frontend muss Anfragen an http://localhost:${port} senden.`);
 });
+
+export default app;
